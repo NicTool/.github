@@ -1,0 +1,13 @@
+
+name: Test Coverage
+
+on:
+  push:
+
+env:
+  CI: true
+
+jobs:
+  coverage:
+    uses: NicTool/.github/.github/workflows/coverage.yml@master
+    secrets: inherit

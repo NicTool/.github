@@ -1,0 +1,12 @@
+{
+    "name": "NicTool Lint",
+    "description": "NicTool Lint Workflow.",
+    "iconName": "nictool-icon",
+    "categories": [
+        "JavaScript"
+    ],
+    "filePatterns": [
+        "package.json$",
+        ".*\\.md$"
+    ]
+}

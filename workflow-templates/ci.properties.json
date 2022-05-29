@@ -1,0 +1,12 @@
+{
+    "name": "NicTool CI",
+    "description": "NicTool CI Workflow including Lint, Coverage, and Testing.",
+    "iconName": "nictool-icon",
+    "categories": [
+        "JavaScript"
+    ],
+    "filePatterns": [
+        "package.json$",
+        ".*\\.md$"
+    ]
+}

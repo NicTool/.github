@@ -1,0 +1,11 @@
+name: Lint
+
+on:
+  push:
+
+env:
+  CI: true
+
+jobs:
+  lint:
+    uses: NicTool/.github/.github/workflows/lint.yml@master

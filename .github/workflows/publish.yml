@@ -59,8 +59,8 @@ jobs:
           scope: "@nictool"
       - name: rename package with @nictool scope
         run: |
-          echo "const fs = require('fs')" > gpr.js
-          echo "const pkg = require('./package.json')" >> gpr.js
+          echo "import fs from 'fs'" > gpr.js
+          echo "const pkg = JSON.parse(fs.readFileSync('./package.json'))" >> gpr.js
           echo "pkg.name = \`@nictool/\${pkg.name}\`" >> gpr.js
           echo "fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))" >> gpr.js
           node gpr.js

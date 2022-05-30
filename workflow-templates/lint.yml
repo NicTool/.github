@@ -8,4 +8,4 @@ env:
 
 jobs:
   lint:
-    uses: NicTool/.github/.github/workflows/lint.yml@master
+    uses: NicTool/.github/.github/workflows/lint.yml@main

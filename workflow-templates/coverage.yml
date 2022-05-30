@@ -9,5 +9,5 @@ env:
 
 jobs:
   coverage:
-    uses: NicTool/.github/.github/workflows/coverage.yml@master
+    uses: NicTool/.github/.github/workflows/coverage.yml@main
     secrets: inherit

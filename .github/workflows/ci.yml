@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: get-tls
-        run: echo "::set-output name=lts::{[\"14\",\"16\"]}"
+        run: echo '::set-output name=lts::["14","16"]'
         # name: Node LTS versions
         # uses: msimerson/node-lts-versions@v1.1.1
     outputs:

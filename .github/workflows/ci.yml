@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: get-tls
-        name: Node LTS versions
-        uses: msimerson/node-lts-versions@v1.1.1
+        echo "::set-output name=lts::{[\"14\",\"16\"]}"
+        # name: Node LTS versions
+        # uses: msimerson/node-lts-versions@v1.1.1
     outputs:
       matrix: ${{ steps.get-tls.outputs.lts }}
 

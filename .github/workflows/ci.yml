@@ -9,10 +9,11 @@ jobs:
   get-lts:
     runs-on: ubuntu-latest
     steps:
-      - name: Node-LTS-versions
+      - id: get-tls
+        name: Node LTS versions
         uses: msimerson/node-lts-versions@v1.1.1
     outputs:
-      lts: ${{ steps.Node-LTS-versions.outputs.lts }}
+      matrix: ${{ steps.get-tls.outputs.lts }}
 
   check-output:
     needs: get-lts
@@ -20,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: ${{ fromJson(needs.get-lts.outputs.lts) }}
+        node-version: ${{ fromJson(needs.get-lts.outputs.matrix) }}
       fail-fast: false
     steps:
     - uses: actions/setup-node@v3

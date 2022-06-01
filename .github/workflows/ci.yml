@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Node LTS versions
         uses: msimerson/node-lts-versions@v1.1.1
-    outputs:
-      lts: ${{ steps.get-lts.outputs.lts }}
+    # outputs:
+    #   lts: ${{ steps.get-lts.outputs.lts }}
 
   check-output:
     needs: get-lts
@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: ${{ fromJson(needs.get-lts.outputs.lts) }}
+        node-version: ${{ fromJson(steps.get-lts.outputs.lts) }}
       fail-fast: false
     steps:
     - uses: actions/setup-node@v3

@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: get-tls
-        run: echo '::set-output name=lts::["14","16"]'
-        # name: Node LTS versions
-        # uses: msimerson/node-lts-versions@v1.1.1
+        run: echo '::set-output name=active::["14","16","18"] name=lts::["14","16"]'
+        # uses: msimerson/node-lts-versions@v1.2.0
     outputs:
-      matrix: ${{ steps.get-tls.outputs.lts }}
+      lts: ${{ steps.get-tls.outputs.lts }}
+      active: ${{ steps.get-tls.outputs.active }}
 
   check-output:
     needs: get-lts
@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: ${{ fromJson(needs.get-lts.outputs.matrix) }}
+        node-version: ${{ fromJson(needs.get-lts.outputs.active) }}
       fail-fast: false
     steps:
     - uses: actions/setup-node@v3

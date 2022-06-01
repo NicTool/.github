@@ -1,21 +1,12 @@
-name: CI
-
 on:
   push:
 
 env:
   CI: true
+  node-version: 16
 
 jobs:
-  lint:
-    uses: NicTool/.github/.github/workflows/lint.yml@main
-
-  coverage:
-    uses: NicTool/.github/.github/workflows/coverage.yml@main
-    secrets: inherit
-
   get-lts:
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - id: get-tls
@@ -24,24 +15,17 @@ jobs:
       lts: ${{ steps.get-tls.outputs.lts }}
       active: ${{ steps.get-tls.outputs.active }}
 
-  test:
+  check-output:
     needs: get-lts
-    runs-on: ${{ matrix.os }}
-    # services:
-    #   redis:
-    #     image: redis
-    #     ports:
-    #       - 6379:6379
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         node-version: ${{ fromJson(needs.get-lts.outputs.active) }}
       fail-fast: false
     steps:
-    - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       name: Node ${{ matrix.node-version }} on ${{ matrix.os }}
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm test
+

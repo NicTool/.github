@@ -1,0 +1,13 @@
+on:
+  push:
+
+env:
+  CI: true
+  node-version: 16
+
+jobs:
+  tomfoolery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Node LTS versions
+        uses: msimerson/node-lts-versions@v1.1.1

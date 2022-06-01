@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: ${{ fromJson(steps.get-lts.outputs.lts) }}
+        node-version: ${{ fromJson(needs.get-lts.outputs.lts) }}
       fail-fast: false
     steps:
     - uses: actions/setup-node@v3

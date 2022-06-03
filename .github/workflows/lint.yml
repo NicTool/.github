@@ -6,7 +6,7 @@ on:
 
 env:
   CI: true
-  node-version: 16
+  node-version: lts/*
 
 jobs:
   lint:

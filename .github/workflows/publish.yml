@@ -11,11 +11,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         name: Node ${{ env.node-version }}
         with:
           node-version: ${{ env.node-version }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: npm install
       - run: npm test
 
@@ -24,13 +24,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         name: Node ${{ env.node-version }}
         with:
           node-version: ${{ env.node-version }}
           registry-url: https://registry.npmjs.org/
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           # fetch-depth 0 needed by GitHub Release
@@ -51,8 +51,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node-version }}
           registry-url: https://npm.pkg.github.com/

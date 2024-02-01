@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       name: Node ${{ env.node-version }}
       with:
         node-version: ${{ env.node-version }}
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - run: npm install
 

@@ -1,12 +1,7 @@
 {
-    "name": "NicTool Code Coverage",
-    "description": "NicTool Project Code Coverage",
-    "iconName": "nictool-icon",
-    "categories": [
-        "JavaScript"
-    ],
-    "filePatterns": [
-        "package.json$",
-        ".*\\.md$"
-    ]
+  "name": "NicTool Code Coverage",
+  "description": "NicTool Project Code Coverage",
+  "iconName": "nictool-icon",
+  "categories": ["JavaScript"],
+  "filePatterns": ["package.json$", ".*\\.md$"]
 }

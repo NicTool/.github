@@ -11,24 +11,24 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-node@v4
-      name: Node ${{ env.node-version }}
-      with:
-        node-version: ${{ env.node-version }}
+      - uses: actions/setup-node@v4
+        name: Node ${{ env.node-version }}
+        with:
+          node-version: ${{ env.node-version }}
 
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - run: npm install
+      - run: npm install
 
-    - name: run coverage
-      run: npx -y c8 --reporter=lcov npm test
-      env:
-        NODE_ENV: cov
+      - name: run coverage
+        run: npx -y c8 --reporter=lcov npm test
+        env:
+          NODE_ENV: cov
 
-    - name: codecov
-      uses: codecov/codecov-action@v2
+      - name: codecov
+        uses: codecov/codecov-action@v2
 
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}

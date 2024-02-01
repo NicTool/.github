@@ -1,12 +1,7 @@
 {
-    "name": "NicTool CodeQL",
-    "description": "NicTool Project CodeQL Workflow.",
-    "iconName": "nictool-icon",
-    "categories": [
-        "JavaScript"
-    ],
-    "filePatterns": [
-        "package.json$",
-        ".*\\.md$"
-    ]
+  "name": "NicTool CodeQL",
+  "description": "NicTool Project CodeQL Workflow.",
+  "iconName": "nictool-icon",
+  "categories": ["JavaScript"],
+  "filePatterns": ["package.json$", ".*\\.md$"]
 }

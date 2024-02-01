@@ -1,4 +1,3 @@
-
 name: Lint
 
 on:
@@ -12,14 +11,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v4
+        name: Node ${{ env.node-version }}
+        with:
+          node-version: ${{ env.node-version }}
 
-    - uses: actions/setup-node@v4
-      name: Node ${{ env.node-version }}
-      with:
-        node-version: ${{ env.node-version }}
+      - uses: actions/checkout@v4
 
-    - uses: actions/checkout@v4
+      - run: npm install
 
-    - run: npm install
-
-    - run: npm run lint
+      - run: npm run lint

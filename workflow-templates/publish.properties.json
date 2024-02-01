@@ -1,12 +1,7 @@
 {
-    "name": "NicTool Publish",
-    "description": "NicTool Publish Workflow.",
-    "iconName": "nictool-icon",
-    "categories": [
-        "JavaScript"
-    ],
-    "filePatterns": [
-        "package.json$",
-        ".*\\.md$"
-    ]
+  "name": "NicTool Publish",
+  "description": "NicTool Publish Workflow.",
+  "iconName": "nictool-icon",
+  "categories": ["JavaScript"],
+  "filePatterns": ["package.json$", ".*\\.md$"]
 }

@@ -1,5 +1,8 @@
 name: Test
 
+on:
+  workflow_call:
+
 jobs:
   test:
     needs: get-lts

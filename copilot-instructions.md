@@ -25,6 +25,9 @@ High-level dependency flow:
 
 ## Monorepo Working Rules
 
+- ## Commands
+
+- All commands are run from within the relevant package directory (e.g., `cd NicTool` or `cd dns-resource-record`).
 - There is no single root `package.json` for all packages. Run install/test/lint inside the package you are changing.
 - Keep changes scoped. If you need to change API behavior, update the API package and its tests, but do not make sweeping changes to shared libraries unless necessary.
 - Respect each package's existing module system:

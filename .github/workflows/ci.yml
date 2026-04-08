@@ -7,6 +7,8 @@ env:
 jobs:
   get-lts:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - id: get
         uses: msimerson/node-lts-versions@v1
@@ -17,6 +19,8 @@ jobs:
   check-output:
     needs: get-lts
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]

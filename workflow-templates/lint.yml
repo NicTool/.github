@@ -10,3 +10,5 @@ env:
 jobs:
   lint:
     uses: NicTool/.github/.github/workflows/lint.yml@main
+    permissions:
+      contents: read

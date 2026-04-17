@@ -5,7 +5,7 @@ on:
 
 env:
   CI: true
-  node-version: lts/*
+  NODE_ENV: cov
 
 jobs:
   coverage:
@@ -13,24 +13,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/setup-node@v6
-        name: Node ${{ env.node-version }}
-        with:
-          node-version: ${{ env.node-version }}
-
-      - uses: actions/checkout@v6
-
+      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
       - run: npm install
-
-      - name: run coverage
-        run: npx -y c8 --reporter=lcov npm test
-        env:
-          NODE_ENV: cov
-
-      - name: codecov
-        uses: codecov/codecov-action@v2
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - run: npm run test:coverage
+      - uses: codecov/codecov-action@v2
+      - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

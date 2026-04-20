@@ -13,10 +13,10 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/setup-node@v4
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
       - run: npm install
-      - run: npm run test:coverage
+      - run: npm run test:coverage:lcov || npm run test:coverage
       - uses: codecov/codecov-action@v2
       - uses: coverallsapp/github-action@master
         with:

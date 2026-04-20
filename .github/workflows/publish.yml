@@ -27,10 +27,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           registry-url: https://registry.npmjs.org/
+          node-version: 24
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
 
   publish-gpr:
     needs: build

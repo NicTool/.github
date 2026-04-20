@@ -11,18 +11,35 @@ jobs:
       contents: read
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         node-version: ${{ fromJson(needs.get-lts.outputs.lts) }}
       fail-fast: false
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
-        name: Node ${{ matrix.node-version }} on ${{ matrix.os }}
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm test
-        continue-on-error: ${{ matrix.node-version == 20 && matrix.os == 'windows-latest' }}
+
+  test-active:
+    # only test on the active LTS version, to save resources
+    needs: get-lts
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+        node-version: ${{ fromJson(needs.get-lts.outputs.active) }}
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm test
 
   get-lts:
     runs-on: ubuntu-latest

@@ -2,21 +2,22 @@ name: Test Coverage
 
 on:
   workflow_call:
-  push:
-    branches: [main]
 
 env:
   CI: true
   NODE_ENV: cov
 
+permissions:
+  contents: read
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - run: npm install
       - run: npm run test:coverage:lcov || npm run test:coverage
       - uses: codecov/codecov-action@v2

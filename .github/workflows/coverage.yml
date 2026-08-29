@@ -1,10 +1,15 @@
-name: Test Coverage
+name: Coverage
 
 on:
   workflow_call:
     inputs:
       dnssec-tools:
         description: install BIND's dnssec-keygen and dnssec-signzone
+        type: boolean
+        required: false
+        default: false
+      mysql:
+        description: start MySQL and load the schema
         type: boolean
         required: false
         default: false
@@ -27,6 +32,12 @@ jobs:
       - name: install BIND dnssec tools
         if: inputs.dnssec-tools
         run: sudo apt-get update && sudo apt-get install -y bind9-utils
+      - name: start MySQL
+        if: inputs.mysql
+        run: sudo /etc/init.d/mysql start
+      - name: initialize MySQL
+        if: inputs.mysql
+        run: sh sql/init-mysql.sh
       - run: npm install
       - run: npm run test:coverage:lcov || npm run test:coverage
       - uses: codecov/codecov-action@v6

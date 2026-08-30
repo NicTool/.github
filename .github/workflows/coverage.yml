@@ -13,6 +13,11 @@ on:
         type: boolean
         required: false
         default: false
+      data-stores:
+        description: run coverage once per NICTOOL_DATA_STORE, comma separated
+        type: string
+        required: false
+        default: ''
 
 env:
   CI: true
@@ -39,8 +44,26 @@ jobs:
         if: inputs.mysql
         run: sh sql/init-mysql.sh
       - run: npm install
-      - run: npm run test:coverage:lcov || npm run test:coverage
+      - name: measure coverage
+        id: cov
+        env:
+          STORES: ${{ inputs.data-stores }}
+        run: |
+          if [ -z "$STORES" ]; then
+            npm run test:coverage:lcov || npm run test:coverage
+            exit 0
+          fi
+          for store in $(echo "$STORES" | tr ',' ' '); do
+            NICTOOL_DATA_STORE=$store npm run test:coverage:lcov
+            cp coverage/lcov.info "coverage/lcov-$store.info"
+          done
+          # coveralls below reads coverage/lcov.info, so leave the first store there
+          cp "coverage/lcov-$(echo "$STORES" | cut -d, -f1).info" coverage/lcov.info
+          echo "files=$(ls coverage/lcov-*.info | paste -sd, -)" >> "$GITHUB_OUTPUT"
       - uses: codecov/codecov-action@v6
+        with:
+          files: ${{ steps.cov.outputs.files }}
+          disable_search: ${{ steps.cov.outputs.files != '' }}
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

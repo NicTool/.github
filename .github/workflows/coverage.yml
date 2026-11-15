@@ -39,7 +39,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y bind9-utils
       - name: start MySQL
         if: inputs.mysql
-        run: sudo /etc/init.d/mysql start
+        run: sudo systemctl start mysql.service
       - name: initialize MySQL
         if: inputs.mysql
         run: sh sql/init-mysql.sh
